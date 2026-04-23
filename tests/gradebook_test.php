@@ -73,6 +73,8 @@ final class gradebook_test extends advanced_testcase {
 
     /**
      * Helper: seed a progress row for the current student with an explicit percent.
+     *
+     * @param float $percent Completion percentage to seed (0.0-100.0).
      */
     private function seed_percent(float $percent): void {
         global $DB;
