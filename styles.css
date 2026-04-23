@@ -357,3 +357,47 @@
 .content.activityiconcontainer.icon-size-6.modicon_modernvideoplayer {
     margin-right: 10px;
 }
+/* ---------- Captions & transcript ---------- */
+.modernvideoplayer-controls__button--active {
+    background: rgba(59, 130, 246, 0.18);
+    color: #1d4ed8;
+}
+.modernvideoplayer-transcript {
+    max-height: 18rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.modernvideoplayer-transcript__body {
+    overflow-y: auto;
+    max-height: 15rem;
+}
+.modernvideoplayer-transcript__cue {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+.modernvideoplayer-transcript__cue:last-child {
+    border-bottom: 0;
+}
+.modernvideoplayer-transcript__button {
+    text-decoration: none;
+    color: inherit;
+    border-radius: 0.5rem;
+    transition: background-color 120ms ease;
+}
+.modernvideoplayer-transcript__button:hover,
+.modernvideoplayer-transcript__button:focus-visible {
+    background: rgba(59, 130, 246, 0.08);
+    text-decoration: none;
+}
+.modernvideoplayer-transcript__cue--active .modernvideoplayer-transcript__button {
+    background: rgba(59, 130, 246, 0.18);
+    color: #1d4ed8;
+    font-weight: 600;
+}
+.modernvideoplayer-transcript__time {
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85em;
+}
+.modernvideoplayer-transcript__text {
+    white-space: pre-wrap;
+}

@@ -194,3 +194,27 @@ $string['startfrombeginning'] = 'Start from beginning';
 $string['resumeplaybackfrom'] = 'Resume from {$a}';
 $string['resumepromptheading'] = 'Continue where you left off?';
 $string['resumepromptbody'] = 'Pick up from your last verified point or restart from the beginning.';
+
+// Captions & transcript.
+$string['captionssettings'] = 'Captions & transcript';
+$string['captions'] = 'Caption tracks (WebVTT)';
+$string['captions_help'] = 'Upload one or more WebVTT (`.vtt`) caption files. Learners can turn captions on or off with the **CC** button in the player controls.
+
+To support multiple languages, include the language code in the filename using a dot, hyphen, or underscore suffix just before `.vtt`. For example:
+
+* `lecture1.en.vtt` — English
+* `lecture1.fr.vtt` — French
+* `lecture1.es-MX.vtt` — Mexican Spanish
+
+Files without a recognised language suffix fall back to the **Default caption language** setting below.';
+$string['defaultcaptionlang'] = 'Default caption language';
+$string['defaultcaptionlang_help'] = 'BCP-47 language code used when a caption file does not include a recognised suffix, and to select which track the transcript panel parses by default. Examples: `en`, `en-GB`, `fr`, `es-MX`.';
+$string['defaultdefaultcaptionlang'] = 'Default caption language (site default)';
+$string['captionsoff'] = 'Captions off';
+$string['captionson'] = 'Captions: {$a}';
+$string['togglecaptions'] = 'Toggle captions';
+$string['toggletranscript'] = 'Toggle transcript';
+$string['transcript'] = 'Transcript';
+$string['transcriptloading'] = 'Loading transcript…';
+$string['transcriptunavailable'] = 'No transcript is available for this video.';
+$string['transcriptjumpto'] = 'Jump to {$a} in the video';

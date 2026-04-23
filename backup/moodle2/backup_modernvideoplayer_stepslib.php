@@ -31,7 +31,8 @@ class backup_modernvideoplayer_activity_structure_step extends backup_activity_s
 
         $modernvideoplayer = new backup_nested_element('modernvideoplayer', ['id'], [
             'name', 'intro', 'introformat', 'videoitemid', 'posteritemid', 'requiredpercent',
-            'completionmode', 'allowresume', 'allowrewind', 'allowfullscreen', 'autoplay', 'allowplaybackspeed',
+            'completionmode', 'allowresume', 'allowrewind', 'allowfullscreen', 'autoplay',
+            'defaultcaptionlang', 'allowplaybackspeed',
             'maxplaybackspeed', 'graceseconds', 'heartbeatinterval', 'forceservervalidation',
             'strictendvalidation', 'showsuspiciousflags', 'timecreated', 'timemodified',
         ]);
@@ -65,6 +66,7 @@ class backup_modernvideoplayer_activity_structure_step extends backup_activity_s
         $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'intro', null);
         $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'video', null);
         $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'poster', null);
+        $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'captions', null);
 
         return $this->prepare_activity_structure($modernvideoplayer);
     }
