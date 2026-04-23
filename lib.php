@@ -49,6 +49,10 @@ function modernvideoplayer_supports($feature) {
         case FEATURE_MOD_PURPOSE:
             return MOD_PURPOSE_CONTENT;
         case FEATURE_GRADE_HAS_GRADE:
+            return true;
+        case FEATURE_GRADE_OUTCOMES:
+            return false;
+        case FEATURE_ADVANCED_GRADING:
             return false;
         default:
             return null;
@@ -77,6 +81,12 @@ function modernvideoplayer_add_instance($data, $mform = null): int {
     $context = context_module::instance($data->coursemodule);
     modernvideoplayer_save_files($data, $context);
     modernvideoplayer_update_completion_event($data->coursemodule, $data);
+    modernvideoplayer_grade_item_update((object) [
+        'id'     => $data->id,
+        'course' => $data->course,
+        'name'   => $data->name,
+        'grade'  => (int) ($data->grade ?? 100),
+    ]);
 
     return $data->id;
 }
@@ -102,6 +112,9 @@ function modernvideoplayer_update_instance($data, $mform = null): bool {
     $context = context_module::instance($data->coursemodule);
     modernvideoplayer_save_files($data, $context);
     modernvideoplayer_update_completion_event($data->coursemodule, $data);
+    $instance = $DB->get_record('modernvideoplayer', ['id' => $data->id], 'id, course, name, grade', MUST_EXIST);
+    modernvideoplayer_grade_item_update($instance);
+    modernvideoplayer_update_grades($instance);
 
     return true;
 }
@@ -130,6 +143,7 @@ function modernvideoplayer_delete_instance($id): bool {
         $DB->delete_records_select('modernvideoplayer_segments', "progressid $insql", $params);
     }
     $DB->delete_records('modernvideoplayer_progress', ['modernvideoplayerid' => $id]);
+    modernvideoplayer_grade_item_delete($instance);
     $DB->delete_records('modernvideoplayer', ['id' => $id]);
 
     return true;
@@ -433,4 +447,134 @@ function modernvideoplayer_normalise_completion_settings(stdClass $data): void {
         $data->strictendvalidation = 0;
         $data->completionmode     = 0;
     }
+}
+
+/**
+ * Create or update the grade item for this activity in the gradebook.
+ *
+ * @param stdClass $instance modernvideoplayer record (must include id, course, name, grade)
+ * @param mixed $grades 'reset' to reset grades, or an object/array of grade rows, or null
+ * @return int GRADE_UPDATE_OK on success
+ */
+function modernvideoplayer_grade_item_update(stdClass $instance, $grades = null): int {
+    global $CFG;
+    require_once($CFG->libdir . '/gradelib.php');
+
+    $params = [
+        'itemname' => $instance->name,
+        'idnumber' => $instance->cmidnumber ?? null,
+    ];
+
+    $grademax = (int) ($instance->grade ?? 100);
+    if ($grademax > 0) {
+        $params['gradetype'] = GRADE_TYPE_VALUE;
+        $params['grademax']  = $grademax;
+        $params['grademin']  = 0;
+    } else {
+        // A grade of 0 means "no grade" — hide the item from the gradebook.
+        $params['gradetype'] = GRADE_TYPE_NONE;
+    }
+
+    if ($grades === 'reset') {
+        $params['reset'] = true;
+        $grades = null;
+    }
+
+    return grade_update(
+        'mod/modernvideoplayer',
+        $instance->course,
+        'mod',
+        'modernvideoplayer',
+        $instance->id,
+        0,
+        $grades,
+        $params
+    );
+}
+
+/**
+ * Delete the grade item for this activity.
+ *
+ * @param stdClass $instance modernvideoplayer record
+ * @return int GRADE_UPDATE_OK on success
+ */
+function modernvideoplayer_grade_item_delete(stdClass $instance): int {
+    global $CFG;
+    require_once($CFG->libdir . '/gradelib.php');
+
+    return grade_update(
+        'mod/modernvideoplayer',
+        $instance->course,
+        'mod',
+        'modernvideoplayer',
+        $instance->id,
+        0,
+        null,
+        ['deleted' => 1]
+    );
+}
+
+/**
+ * Compute the current grade for one or all learners for an activity.
+ *
+ * Grade is computed as the proportion of `percentcomplete` against grademax:
+ * a learner who has watched 80% of the video receives 0.80 * grademax.
+ *
+ * @param stdClass $instance activity record (must include id, course, grade)
+ * @param int $userid 0 = all users; otherwise a single user id
+ * @return array [userid => grade row]
+ */
+function modernvideoplayer_get_user_grades(stdClass $instance, int $userid = 0): array {
+    global $DB;
+
+    $params = ['modernvideoplayerid' => $instance->id];
+    if ($userid) {
+        $params['userid'] = $userid;
+    }
+
+    $rows = $DB->get_records('modernvideoplayer_progress', $params);
+    $grademax = (int) ($instance->grade ?? 100);
+    $grades = [];
+
+    foreach ($rows as $row) {
+        $percent = max(0.0, min(100.0, (float) $row->percentcomplete));
+        $grade = (float) $grademax * ($percent / 100.0);
+
+        $grades[(int) $row->userid] = (object) [
+            'userid'       => (int) $row->userid,
+            'rawgrade'     => round($grade, 2),
+            'dategraded'   => (int) ($row->completiontime ?? $row->timemodified ?? time()),
+            'datesubmitted' => (int) ($row->timecreated ?? 0),
+        ];
+    }
+
+    return $grades;
+}
+
+/**
+ * Push one or many learner grades to the gradebook.
+ *
+ * @param stdClass $instance activity record
+ * @param int $userid 0 = recalculate all
+ * @param bool $nullifnone when true, push null grade if learner has no progress
+ * @return int GRADE_UPDATE_* status
+ */
+function modernvideoplayer_update_grades(stdClass $instance, int $userid = 0, bool $nullifnone = true): int {
+    global $CFG;
+    require_once($CFG->libdir . '/gradelib.php');
+
+    $grades = modernvideoplayer_get_user_grades($instance, $userid);
+    if ($grades) {
+        return modernvideoplayer_grade_item_update($instance, $grades);
+    }
+
+    if ($userid && $nullifnone) {
+        $grade = (object) [
+            'userid'   => $userid,
+            'rawgrade' => null,
+        ];
+        return modernvideoplayer_grade_item_update($instance, $grade);
+    }
+
+    return modernvideoplayer_grade_item_update($instance);
 }

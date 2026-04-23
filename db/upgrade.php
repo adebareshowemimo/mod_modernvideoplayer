@@ -168,5 +168,17 @@ function xmldb_modernvideoplayer_upgrade(int $oldversion): bool {
         upgrade_mod_savepoint(true, 2026042014, 'modernvideoplayer');
     }
 
+    if ($oldversion < 2026042015) {
+        // Gradebook integration: add numeric grade column to the main table.
+        $table = new xmldb_table('modernvideoplayer');
+        $field = new xmldb_field('grade', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '100', 'timemodified');
+
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_mod_savepoint(true, 2026042015, 'modernvideoplayer');
+    }
+
     return true;
 }

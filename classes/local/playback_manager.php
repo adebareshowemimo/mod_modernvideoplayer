@@ -75,6 +75,8 @@ class playback_manager {
      * @return stdClass
      */
     public function heartbeat(stdClass $course, stdClass $cm, stdClass $instance, int $userid, stdClass $payload): stdClass {
+        global $CFG;
+
         $progress = $this->repository->get_or_create($instance->id, $userid);
 
         if (empty($progress->sessiontoken) || $progress->sessiontoken !== $payload->sessiontoken) {
@@ -127,6 +129,11 @@ class playback_manager {
         // (e.g. $progress->completed, $progress->completiontime).
         $this->repository->save($progress);
 
+        // Push the refreshed grade to the gradebook. The grade is derived from
+        // percentcomplete, so it must run after the save above.
+        require_once($CFG->dirroot . '/mod/modernvideoplayer/lib.php');
+        modernvideoplayer_update_grades($instance, $userid);
+
         $event = \mod_modernvideoplayer\event\progress_updated::create([
             'context' => context_module::instance($cm->id),
             'objectid' => $instance->id,
@@ -156,12 +163,18 @@ class playback_manager {
      * @return stdClass fresh progress with new session token
      */
     public function reset_progress(stdClass $course, stdClass $cm, stdClass $instance, int $userid): stdClass {
+        global $CFG;
+
         $progress = $this->repository->reset($instance->id, $userid);
 
         // Do NOT touch Moodle's completion record here. Completion is sticky:
         // resetting watch progress lets the learner re-watch from the start,
         // but any previously-earned completion tick is preserved. Teachers who
         // need to revoke completion must use Moodle's standard tools.
+
+        // Push the zeroed grade to the gradebook.
+        require_once($CFG->dirroot . '/mod/modernvideoplayer/lib.php');
+        modernvideoplayer_update_grades($instance, $userid);
 
         return (object) [
             'sessiontoken' => $progress->sessiontoken,

@@ -10,8 +10,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - Learner bookmarks
 - Picture-in-Picture + transcript download
-- Gradebook integration
 - Behat acceptance tests
+
+## [0.8.0] - 2026-04-23
+
+### Added
+- **Gradebook integration** (`FEATURE_GRADE_HAS_GRADE`):
+  - New `grade` column on the `modernvideoplayer` table (int, default 100)
+    provisioned via `db/upgrade.php` savepoint 2026042015.
+  - Grade callbacks in `lib.php`:
+    `modernvideoplayer_grade_item_update`, `modernvideoplayer_grade_item_delete`,
+    `modernvideoplayer_get_user_grades`, `modernvideoplayer_update_grades`.
+  - Grade is derived linearly from `percentcomplete`
+    (learner_grade = grademax × percentcomplete / 100).
+  - Gradebook is refreshed from every heartbeat and from `reset_progress`,
+    so teacher-facing grade columns stay in sync with watch progress.
+  - `mod_form.php` now exposes the standard `Maximum grade` element.
+- PHPUnit coverage in `tests/gradebook_test.php` exercises grade item
+  creation, proportional scaling, custom grademax, gradebook writes, and
+  grade-item deletion (6 tests / 13 assertions).
+- Total plugin suite now **29 tests / 78 assertions**.
 
 ## [0.7.0] - 2026-04-23
 
