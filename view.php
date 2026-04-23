@@ -152,6 +152,9 @@ $jsconfig = [
         'chaptersunavailable' => get_string('chaptersunavailable', 'modernvideoplayer'),
         'chapterjumpto' => get_string('chapterjumpto', 'modernvideoplayer', '__TIME__'),
         'currentchapter' => get_string('currentchapter', 'modernvideoplayer', '__LABEL__'),
+        'playbackspeed' => get_string('playbackspeed', 'modernvideoplayer'),
+        'speednormal' => get_string('speednormal', 'modernvideoplayer'),
+        'shortcutshelp' => get_string('shortcutshelp', 'modernvideoplayer'),
     ],
 ];
 

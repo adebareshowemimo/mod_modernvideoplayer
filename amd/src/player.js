@@ -12,6 +12,8 @@ import * as Enforcer from 'mod_modernvideoplayer/enforcer';
 import * as Tracker from 'mod_modernvideoplayer/tracker';
 import * as Captions from 'mod_modernvideoplayer/captions';
 import * as Chapters from 'mod_modernvideoplayer/chapters';
+import * as SpeedMenu from 'mod_modernvideoplayer/speedmenu';
+import * as Shortcuts from 'mod_modernvideoplayer/shortcuts';
 
 const getProgress = (cmid) => Ajax.call([{
     methodname: 'mod_modernvideoplayer_get_progress',
@@ -141,6 +143,9 @@ export const init = (config) => {
         if (config.haschapters) {
             Chapters.init(root, video, config);
         }
+
+        SpeedMenu.init(root, video, state, config.strings);
+        Shortcuts.init(root, video, state, config);
 
         Enforcer.init(video, state, config.strings);
 

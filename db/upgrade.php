@@ -143,5 +143,10 @@ function xmldb_modernvideoplayer_upgrade(int $oldversion): bool {
         upgrade_mod_savepoint(true, 2026042009, 'modernvideoplayer');
     }
 
+    if ($oldversion < 2026042010) {
+        // No schema changes; added keyboard shortcuts + playback speed menu AMD modules.
+        upgrade_mod_savepoint(true, 2026042010, 'modernvideoplayer');
+    }
+
     return true;
 }
