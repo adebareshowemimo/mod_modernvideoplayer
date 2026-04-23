@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync zip
+
+      - name: Stage plugin folder
+        run: |
+          mkdir -p dist/modernvideoplayer
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='dist' \
+            --exclude='node_modules' \
+            --exclude='tests' \
+            --exclude='.gitignore' \
+            --exclude='.gitattributes' \
+            --exclude='CONTRIBUTING.md' \
+            --exclude='CODE_OF_CONDUCT.md' \
+            --exclude='SECURITY.md' \
+            ./ dist/modernvideoplayer/
+
+      - name: Build ZIP
+        id: zip
+        run: |
+          VERSION="${GITHUB_REF_NAME}"
+          FILENAME="modernvideoplayer-${VERSION}.zip"
+          cd dist && zip -r "../${FILENAME}" modernvideoplayer
+          cd ..
+          sha256sum "${FILENAME}" > "${FILENAME}.sha256"
+          echo "filename=${FILENAME}" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ steps.zip.outputs.filename }}
+            ${{ steps.zip.outputs.filename }}.sha256
+          generate_release_notes: true
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! For large features please start a
+        [Discussion](https://github.com/adebareshowemimo/modernvideoplayer/discussions)
+        first so we can align on scope before you invest time in a PR.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the learner / instructor / admin pain point.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Should this be in the free (community) edition?
+      options:
+        - "Yes — accessibility / core playback / basic pedagogy"
+        - "Probably premium (compliance / scale / assessment / IP protection)"
+        - "Not sure"
+    validations:
+      required: true

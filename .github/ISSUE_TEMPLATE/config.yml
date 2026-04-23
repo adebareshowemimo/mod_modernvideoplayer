@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & discussions
+    url: https://github.com/adebareshowemimo/modernvideoplayer/discussions
+    about: Please ask questions and share ideas in Discussions, not Issues.
+  - name: Security vulnerability
+    url: https://github.com/adebareshowemimo/modernvideoplayer/security/policy
+    about: Please do NOT file public issues for security bugs — see SECURITY.md.
+  - name: Commercial support
+    url: mailto:sales@agunfoninteractivity.com
+    about: SLA support, Pro/Enterprise features, custom development.

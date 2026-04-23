@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build artefacts (AMD build is committed; everything else is not)
+dist/
+*.log
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Moodle local dev
+config.php
+moodledata/
+
+# Test output
+.phpunit.result.cache
+coverage/
+tests/behat/tmp/
+
+# Composer
+composer.lock
+
+# Environment
+.env
+.env.local

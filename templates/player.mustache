@@ -1,0 +1,57 @@
+{{!
+    @template mod_modernvideoplayer/player
+}}
+<div class="modernvideoplayer" data-region="modern-video-player" data-cmid="{{cmid}}">
+    {{#focusmode}}
+        <div class="modernvideoplayer__shell">
+            <div class="modernvideoplayer__topbar">
+                {{#showtitle}}
+                    <h1 class="modernvideoplayer__title {{#titleleft}}modernvideoplayer__title--left{{/titleleft}}{{#titlecenter}}modernvideoplayer__title--center{{/titlecenter}}{{#titleright}}modernvideoplayer__title--right{{/titleright}}">{{name}}</h1>
+                {{/showtitle}}
+                <a class="modernvideoplayer__close btn-close" href="{{backurl}}" aria-label="{{backlabel}}"></a>
+            </div>
+            <div class="modernvideoplayer__content">
+    {{/focusmode}}
+    {{{intro}}}
+    {{#reporturl}}
+        <div class="mb-3">
+            <a class="btn btn-secondary" href="{{reporturl}}">{{#str}}report, modernvideoplayer{{/str}}</a>
+        </div>
+    {{/reporturl}}
+    <div class="{{#focusmode}}modernvideoplayer__stage{{/focusmode}}{{^focusmode}}card shadow-sm{{/focusmode}}">
+        <div class="{{#focusmode}}modernvideoplayer__player{{/focusmode}}{{^focusmode}}card-body{{/focusmode}}">
+            <div class="position-relative overflow-hidden {{#focusmode}}modernvideoplayer__stage{{/focusmode}}{{^focusmode}}rounded{{/focusmode}}" data-region="player-stage">
+            <video
+                class="{{#focusmode}}modernvideoplayer__video{{/focusmode}}{{^focusmode}}w-100{{/focusmode}}"
+                preload="metadata"
+                data-region="video"
+                aria-label="{{#str}}playerlabel, modernvideoplayer{{/str}}"
+                {{#posterurl}}poster="{{posterurl}}"{{/posterurl}}
+                {{#allowfullscreen}}playsinline{{/allowfullscreen}}>
+                {{#hasvideo}}
+                    <source src="{{videourl}}">
+                {{/hasvideo}}
+            </video>
+                <div
+                    class="position-absolute top-0 start-0 w-100 h-100 d-none align-items-center justify-content-center p-3"
+                    data-region="resume-overlay"
+                    style="background: linear-gradient(135deg, rgba(7, 15, 28, 0.84), rgba(10, 25, 47, 0.68)); backdrop-filter: blur(8px);">
+                    <div class="text-center text-white p-4 rounded-4 shadow-lg" style="max-width: 28rem; background: rgba(15, 23, 42, 0.72); border: 1px solid rgba(255, 255, 255, 0.12);">
+                        <div class="text-uppercase small fw-semibold mb-2" style="letter-spacing: .12em; color: rgba(191, 219, 254, 0.9);">{{#str}}resumeplayback, modernvideoplayer{{/str}}</div>
+                        <h3 class="h4 mb-2" data-region="resume-heading">{{#str}}resumepromptheading, modernvideoplayer{{/str}}</h3>
+                        <p class="mb-4 text-white-50" data-region="resume-subtitle">{{#str}}resumepromptbody, modernvideoplayer{{/str}}</p>
+                        <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                            <button type="button" class="btn btn-primary px-4" data-action="resume-playback">{{#str}}resumeplayback, modernvideoplayer{{/str}}</button>
+                            <button type="button" class="btn btn-outline-light px-4" data-action="restart-playback">{{#str}}startfrombeginning, modernvideoplayer{{/str}}</button>
+                        </div>
+                    </div>
+                </div>
+                {{>mod_modernvideoplayer/controls}}
+            </div>
+        </div>
+    </div>
+    {{#focusmode}}
+            </div>
+        </div>
+    {{/focusmode}}
+</div>

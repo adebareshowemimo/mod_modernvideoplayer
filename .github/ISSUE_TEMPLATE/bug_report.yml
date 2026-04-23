@@ -1,0 +1,92 @@
+name: Bug report
+description: Report a reproducible bug in mod_modernvideoplayer
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report! Please provide as much
+        detail as possible so we can reproduce and fix the issue quickly.
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      description: "e.g. 0.1.0 (found in Site administration → Plugins → Plugins overview)"
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: moodle-version
+    attributes:
+      label: Moodle version
+      placeholder: "4.5.0 / 5.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: "8.2.10"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Other (specify below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, numbered steps.
+      placeholder: |
+        1. Create a new Modern video player activity with autoplay=unmuted
+        2. Open the activity as a learner
+        3. Observe that ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / errors
+      description: Paste relevant PHP errors, JS console errors, or debug output.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I have searched existing issues
+          required: true
+        - label: I can reproduce this on a fresh Moodle install
+          required: false

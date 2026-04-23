@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/modernvideoplayer/db" VERSION="2026042000" COMMENT="Install XML for mod_modernvideoplayer"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="modernvideoplayer" COMMENT="Each record is one modern video player activity">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="videoitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="posteritemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="requiredpercent" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="100.00" SEQUENCE="false"/>
+        <FIELD NAME="completionmode" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="allowresume" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="allowrewind" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="allowfullscreen" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="autoplay" TYPE="char" LENGTH="16" NOTNULL="true" DEFAULT="unmuted" SEQUENCE="false"/>
+        <FIELD NAME="showprimarynav" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="showsecondarynav" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="showcourseindex" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="showrightblocks" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="titleposition" TYPE="char" LENGTH="16" NOTNULL="true" DEFAULT="left" SEQUENCE="false"/>
+        <FIELD NAME="showcontroltext" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="allowplaybackspeed" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="maxplaybackspeed" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="1.00" SEQUENCE="false"/>
+        <FIELD NAME="graceseconds" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="3" SEQUENCE="false"/>
+        <FIELD NAME="heartbeatinterval" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="15" SEQUENCE="false"/>
+        <FIELD NAME="forceservervalidation" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="strictendvalidation" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="showsuspiciousflags" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="modernvideoplayer_progress" COMMENT="One learner progress row per activity">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="modernvideoplayerid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="sessiontoken" TYPE="char" LENGTH="64" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="duration" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="lastposition" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="maxverifiedposition" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="totalsecondswatched" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="percentcomplete" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="completed" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="completiontime" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="lastheartbeat" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="lastplaybackrate" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="1.00" SEQUENCE="false"/>
+        <FIELD NAME="lastvisibility" TYPE="char" LENGTH="16" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="suspiciousflags" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="integrityfailures" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="modernvideoplayerfk" TYPE="foreign" FIELDS="modernvideoplayerid" REFTABLE="modernvideoplayer" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="modernvideoplayeruserid" UNIQUE="true" FIELDS="modernvideoplayerid, userid"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="modernvideoplayer_segments" COMMENT="Validated watched segments">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="progressid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="segmentstart" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="segmentend" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="watchedseconds" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="progressfk" TYPE="foreign" FIELDS="progressid" REFTABLE="modernvideoplayer_progress" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="progressid" UNIQUE="false" FIELDS="progressid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

@@ -1,0 +1,359 @@
+.modernvideoplayer {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.modernvideoplayer__shell {
+    background: linear-gradient(180deg, #f8fbff 0%, #eef4f8 100%);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 1.5rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+}
+
+.modernvideoplayer__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(14px);
+    position: relative;
+}
+
+.modernvideoplayer__close {
+    flex: 0 0 auto;
+    opacity: 0.72;
+    margin-left: auto;
+}
+
+.modernvideoplayer__close:hover,
+.modernvideoplayer__close:focus {
+    opacity: 1;
+}
+
+.modernvideoplayer__title {
+    margin: 0;
+    font-size: clamp(1rem, 0.7rem + 1vw, 1.4rem);
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+    max-width: calc(100% - 3rem);
+}
+
+.modernvideoplayer__title--left {
+    margin-right: auto;
+    text-align: left;
+}
+
+.modernvideoplayer__title--center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.modernvideoplayer__title--right {
+    margin-left: auto;
+    text-align: right;
+    padding-right: 2.5rem;
+}
+
+.modernvideoplayer__content {
+    padding: 1.25rem;
+}
+
+.modernvideoplayer__stage {
+    background: #07111c;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    min-height: min(70vh, 42rem);
+}
+
+.modernvideoplayer__video {
+    display: block;
+    width: 100%;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.modernvideoplayer-status {
+    display: block;
+}
+
+.modernvideoplayer-status__item {
+    display: grid;
+    gap: 0.85rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: none;
+}
+
+.modernvideoplayer-status__headline {
+    color: #eaf1ff;
+    font-size: clamp(0.95rem, 0.82rem + 0.4vw, 1.1rem);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.modernvideoplayer-status__meta {
+    color: #c7d4ea;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.modernvideoplayer-status__track {
+    height: 0.4rem;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.modernvideoplayer-status__fill {
+    border-radius: 999px;
+}
+
+.modernvideoplayer-status__fill--verified {
+    background: linear-gradient(90deg, #0b5ed7 0%, #2563eb 100%);
+    z-index: 2;
+}
+
+.modernvideoplayer-status__fill--buffered {
+    background: linear-gradient(90deg, rgba(14, 116, 144, 0.16) 0%, rgba(6, 182, 212, 0.3) 100%);
+    z-index: 1;
+}
+
+.modernvideoplayer-status__thumb {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0.9rem;
+    height: 0.9rem;
+    transform: translate(-50%, -50%);
+    border: 2px solid #3b82f6;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
+    z-index: 3;
+}
+
+.modernvideoplayer-controls {
+    z-index: 3;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.modernvideoplayer-controls__surface {
+    border-radius: 1.15rem;
+    background: rgba(8, 15, 27, 0.72);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+    padding: 0.95rem 1rem 0.85rem;
+}
+
+.modernvideoplayer--playing .modernvideoplayer-controls {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    pointer-events: none;
+}
+
+.modernvideoplayer--playing.modernvideoplayer--controls-visible .modernvideoplayer-controls,
+.modernvideoplayer--playing [data-region="player-stage"]:hover .modernvideoplayer-controls,
+.modernvideoplayer--playing [data-region="player-stage"]:focus-within .modernvideoplayer-controls {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.modernvideoplayer-controls__bar {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modernvideoplayer-controls__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: #eaf1ff;
+    font-weight: 600;
+}
+
+.modernvideoplayer-controls__button:hover,
+.modernvideoplayer-controls__button:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: #fff;
+}
+
+.modernvideoplayer-controls__button--primary {
+    background: rgba(37, 99, 235, 0.92);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.modernvideoplayer-controls__button--primary:hover,
+.modernvideoplayer-controls__button--primary:focus {
+    background: rgba(59, 130, 246, 1);
+}
+
+.modernvideoplayer-controls__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.modernvideoplayer-controls__icon svg {
+    display: block;
+}
+
+.modernvideoplayer-controls__text {
+    font-size: 0.82rem;
+}
+
+.modernvideoplayer-controls--icononly .modernvideoplayer-controls__text {
+    display: none;
+}
+
+.modernvideoplayer-controls--icononly .modernvideoplayer-controls__button {
+    min-width: 2.25rem;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+}
+
+/* Neutralise the extra left offset Boost adds to #page when drawers are present. */
+.modernvideoplayer-focus-mode #page.drawers {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+/* Always hidden in focus mode regardless of instance settings. */
+.modernvideoplayer-focus-mode #page-wrapper #page-footer,
+.modernvideoplayer-focus-mode #page-wrapper .activity-header,
+.modernvideoplayer-focus-mode #page-wrapper #region-main-settings-menu {
+    display: none !important;
+}
+
+/* Hide primary navigation bar only when the instance setting is off. */
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-primarynav #page-wrapper .primary-navigation {
+    display: none !important;
+}
+
+/* Hide secondary navigation (course tabs) and page header only when the instance setting is off.
+   NOTE: Do NOT include #topofscroll here — it is the parent wrapper that contains #page-content
+   and #region-main (the video). Hiding it would hide the video as well. */
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-secondarynav #page-wrapper .secondary-navigation,
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-secondarynav #page-wrapper .tertiary-navigation,
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-secondarynav #page-wrapper #page-header,
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-secondarynav #page-wrapper [data-region="header-actions-container"] {
+    display: none !important;
+}
+
+/* Hide left (course index) drawer and its toggle only when the instance setting is off. */
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-courseindex #page-wrapper [data-region="drawer"][data-side="left"],
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-courseindex #page-wrapper #theme_boost-drawers-courseindex,
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-courseindex #page-wrapper [data-region="drawer-toggle"][data-action="toggle-drawer"][data-side="left"] {
+    display: none !important;
+}
+
+/* Hide right (blocks) drawer and its toggle only when the instance setting is off. */
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-rightblocks #page-wrapper [data-region="right-hand-drawer"],
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-rightblocks #page-wrapper #theme_boost-drawers-blocks,
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-rightblocks #page-wrapper [data-region="drawer-toggle"][data-action="toggle-drawer"][data-side="right"] {
+    display: none !important;
+}
+
+/* Hide the drawer-toggles container only when both drawers are turned off. */
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-courseindex.modernvideoplayer-hide-rightblocks #page-wrapper .drawer-toggles {
+    display: none !important;
+}
+
+/* When the primary navbar is hidden Boost's navbar-offset padding on #page must be adjusted.
+   - If the secondary nav (page header / tabs) is still visible, keep a small breathing-room
+     gap so the header is not flush with the top of the viewport (mirrors the visual space
+     the navbar would have provided on a normal page like forum/view.php).
+   - If both are hidden there is nothing to show at the top, so remove all padding for a
+     fully clean, distraction-free presentation. */
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-primarynav.modernvideoplayer-show-secondarynav #page-wrapper #page {
+    padding-top: 1rem !important;
+}
+.modernvideoplayer-focus-mode.modernvideoplayer-hide-primarynav.modernvideoplayer-hide-secondarynav #page-wrapper #page {
+    padding-top: 0 !important;
+}
+
+
+
+.modernvideoplayer-focus-mode #region-main {
+    padding-top: 1rem;
+}
+
+.modernvideoplayer-focus-mode #region-main-box,
+.modernvideoplayer-focus-mode #region-main {
+    background: transparent;
+}
+
+.modernvideoplayer-focus-mode .activity-description,
+.modernvideoplayer-focus-mode .generalbox {
+    margin-bottom: 0;
+}
+
+@media (max-width: 767.98px) {
+    .modernvideoplayer__topbar {
+        padding-right: 1rem;
+    }
+
+    .modernvideoplayer__title {
+        max-width: calc(100% - 3.25rem);
+    }
+
+    .modernvideoplayer__content {
+        padding: 0.75rem;
+    }
+
+    .modernvideoplayer__title--center {
+        position: static;
+        transform: none;
+        margin-right: auto;
+        text-align: left;
+    }
+
+    .modernvideoplayer__title--right {
+        margin-right: 0;
+        padding-right: 0;
+        text-align: left;
+    }
+
+    .modernvideoplayer__stage {
+        min-height: 0;
+    }
+
+    .modernvideoplayer-controls {
+        padding: 0.75rem;
+    }
+
+    .modernvideoplayer-controls__surface {
+        padding: 0.8rem;
+    }
+
+    .modernvideoplayer-controls__bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .modernvideoplayer-controls__bar > div {
+        justify-content: space-between;
+    }
+}
+
+.content.activityiconcontainer.icon-size-6.modicon_modernvideoplayer {
+    margin-right: 10px;
+}

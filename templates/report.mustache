@@ -1,0 +1,87 @@
+{{!
+    @template mod_modernvideoplayer/report
+}}
+<div class="row g-3 mb-4">
+    <div class="col-md-4 col-xl-2"><div class="card h-100"><div class="card-body"><div class="small text-muted">{{#str}}reporttotallearners, modernvideoplayer{{/str}}</div><div class="h4 mb-0">{{totallearners}}</div></div></div></div>
+    <div class="col-md-4 col-xl-2"><div class="card h-100"><div class="card-body"><div class="small text-muted">{{#str}}reportcompletedlearners, modernvideoplayer{{/str}}</div><div class="h4 mb-0">{{completedlearners}}</div></div></div></div>
+    <div class="col-md-4 col-xl-2"><div class="card h-100"><div class="card-body"><div class="small text-muted">{{#str}}reportcompletionrate, modernvideoplayer{{/str}}</div><div class="h4 mb-0">{{completionrate}}</div></div></div></div>
+    <div class="col-md-4 col-xl-2"><div class="card h-100"><div class="card-body"><div class="small text-muted">{{#str}}reportaveragecoverage, modernvideoplayer{{/str}}</div><div class="h4 mb-0">{{averagecoverage}}</div></div></div></div>
+    <div class="col-md-4 col-xl-2"><div class="card h-100"><div class="card-body"><div class="small text-muted">{{#str}}reportsuspiciousflags, modernvideoplayer{{/str}}</div><div class="h4 mb-0">{{suspiciousflags}}</div></div></div></div>
+    <div class="col-md-4 col-xl-2"><div class="card h-100"><div class="card-body"><div class="small text-muted">{{#str}}reportintegrityfailures, modernvideoplayer{{/str}}</div><div class="h4 mb-0">{{integrityfailures}}</div></div></div></div>
+</div>
+
+<form action="{{filterurl}}" method="get" class="card card-body mb-4">
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="row g-3 align-items-end">
+        <div class="col-md-4">
+            <label class="form-label" for="id_completionfilter">{{#str}}filtercompletion, modernvideoplayer{{/str}}</label>
+            <select class="custom-select form-select" name="completionfilter" id="id_completionfilter">
+                <option value="all" {{#isall}}selected{{/isall}}>{{#str}}filterall, modernvideoplayer{{/str}}</option>
+                <option value="completed" {{#iscompleted}}selected{{/iscompleted}}>{{#str}}filtercompleted, modernvideoplayer{{/str}}</option>
+                <option value="incomplete" {{#isincomplete}}selected{{/isincomplete}}>{{#str}}filterincomplete, modernvideoplayer{{/str}}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="id_search">{{#str}}filtersearch, modernvideoplayer{{/str}}</label>
+            <input class="form-control" type="text" name="search" id="id_search" value="{{search}}">
+        </div>
+        <div class="col-md-2">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="suspiciousonly" value="1" id="id_suspiciousonly" {{#suspiciousonly}}checked{{/suspiciousonly}}>
+                <label class="form-check-label" for="id_suspiciousonly">{{#str}}filtersuspiciousonly, modernvideoplayer{{/str}}</label>
+            </div>
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+            <button class="btn btn-primary" type="submit">{{#str}}filterapply, modernvideoplayer{{/str}}</button>
+            <a class="btn btn-secondary" href="{{downloadurl}}">{{#str}}downloadcsv, modernvideoplayer{{/str}}</a>
+        </div>
+    </div>
+</form>
+
+{{^hasentries}}
+    <div class="alert alert-info">{{#str}}noentries, modernvideoplayer{{/str}}</div>
+{{/hasentries}}
+{{#hasentries}}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{{#str}}fullname, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}email, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}duration, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}lastposition, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}maxverifiedposition, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}totalsecondswatched, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}percentcomplete, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}completed, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}completiontime, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}lastheartbeat, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}lastplaybackrate, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}lastvisibility, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}suspiciousflags, modernvideoplayer{{/str}}</th>
+                    <th>{{#str}}integrityfailures, modernvideoplayer{{/str}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#entries}}
+                    <tr>
+                        <td>{{fullname}}</td>
+                        <td>{{email}}</td>
+                        <td>{{duration}}</td>
+                        <td>{{lastposition}}</td>
+                        <td>{{maxverifiedposition}}</td>
+                        <td>{{totalsecondswatched}}</td>
+                        <td>{{percentcomplete}}</td>
+                        <td>{{completed}}</td>
+                        <td>{{completiontime}}</td>
+                        <td>{{lastheartbeat}}</td>
+                        <td>{{lastplaybackrate}}</td>
+                        <td>{{lastvisibility}}</td>
+                        <td>{{suspiciousflags}}</td>
+                        <td>{{integrityfailures}}</td>
+                    </tr>
+                {{/entries}}
+            </tbody>
+        </table>
+    </div>
+{{/hasentries}}
