@@ -206,5 +206,5 @@ Initial alpha release.
 - Site-wide default settings (autoplay, fullscreen, speed, seek tolerance,
   completion threshold)
 
-[Unreleased]: https://github.com/adebareshowemimo/modernvideoplayer/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/adebareshowemimo/modernvideoplayer/releases/tag/v0.1.0
+[Unreleased]: https://github.com/adebareshowemimo/mod_modernvideoplayer/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/adebareshowemimo/mod_modernvideoplayer/releases/tag/v0.1.0
