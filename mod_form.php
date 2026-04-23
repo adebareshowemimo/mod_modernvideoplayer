@@ -139,6 +139,10 @@ class mod_modernvideoplayer_mod_form extends moodleform_mod {
         $mform->setDefault('showrightblocks', $defaults['showrightblocks']);
         $mform->addHelpButton('showrightblocks', 'showrightblocks', 'modernvideoplayer');
 
+        $mform->addElement('header', 'modstandardgrade', get_string('gradenoun'));
+        $mform->addElement('modgrade', 'grade', get_string('grademax', 'grades'), ['gradeexisting' => true]);
+        $mform->setDefault('grade', 100);
+
         $this->standard_coursemodule_elements();
         $this->add_action_buttons();
     }
