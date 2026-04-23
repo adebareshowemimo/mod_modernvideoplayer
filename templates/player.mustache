@@ -114,6 +114,38 @@
             </div>
         </div>
     {{/haschapters}}
+    <div class="modernvideoplayer-shortcuts-help modal-backdrop-modernvideoplayer d-none" data-region="shortcuts-help" role="dialog" aria-modal="true" aria-labelledby="modernvideoplayer-shortcuts-help-title">
+        <div class="modernvideoplayer-shortcuts-help__dialog card shadow-lg">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="h6 mb-0" id="modernvideoplayer-shortcuts-help-title">{{#str}}shortcutshelptitle, modernvideoplayer{{/str}}</h2>
+                <button type="button" class="btn-close" data-action="close-shortcuts-help" aria-label="{{#str}}shortcutshelpclose, modernvideoplayer{{/str}}"></button>
+            </div>
+            <div class="card-body">
+                <dl class="row mb-0 modernvideoplayer-shortcuts-help__list">
+                    <dt class="col-4 col-sm-3"><kbd>Space</kbd> / <kbd>K</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_playpause, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>J</kbd> / <kbd>←</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_rewind, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>L</kbd> / <kbd>→</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_forward, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>↑</kbd> / <kbd>↓</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_volume, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>M</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_mute, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>F</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_fullscreen, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>C</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_captions, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>0</kbd>…<kbd>9</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_seekpercent, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>&lt;</kbd> / <kbd>&gt;</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_speed, modernvideoplayer{{/str}}</dd>
+                    <dt class="col-4 col-sm-3"><kbd>?</kbd></dt>
+                    <dd class="col-8 col-sm-9">{{#str}}shortcut_help, modernvideoplayer{{/str}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
     {{#focusmode}}
             </div>
         </div>

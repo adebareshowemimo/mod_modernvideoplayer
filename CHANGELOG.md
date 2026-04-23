@@ -26,10 +26,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   as playback progresses; clicking a pin or chapter entry seeks the video.
 - **Chapters button** in the player controls opens the chapter list panel.
 - Chapter files are included in activity backup / restore.
+- **Playback speed menu**: learner-facing 0.5x-2x dropdown that honors the
+  per-instance speed cap and `allowplaybackspeed` flag. Filtered entries
+  above the cap are hidden; the enforcer still clamps programmatic changes.
+- **Keyboard shortcuts**: Space/K (play-pause), J/L and arrow keys (seek 10s,
+  volume), M (mute), F (fullscreen), C (captions), 0-9 (seek to percent),
+  `<` / `>` (speed down/up), `?` (show shortcuts help modal). Seek shortcuts
+  still respect the server-side `allowedposition`.
+- New shortcuts help modal listing all bindings.
 
 ### Planned
-- Learner-facing playback speed UI (0.5×–2×)
-- Keyboard shortcuts + help modal
 - Learner bookmarks
 
 ## [0.1.0] - 2026-04-22

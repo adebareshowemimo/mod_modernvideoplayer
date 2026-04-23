@@ -490,3 +490,83 @@
     white-space: pre-wrap;
 }
 
+
+/* Playback speed menu. */
+.modernvideoplayer-speedmenu {
+    position: relative;
+}
+
+.modernvideoplayer-speedmenu__list {
+    position: absolute;
+    bottom: calc(100% + .25rem);
+    right: 0;
+    min-width: 140px;
+    z-index: 20;
+    display: block;
+    padding: .25rem 0;
+}
+
+.modernvideoplayer-speedmenu__list.d-none {
+    display: none;
+}
+
+.modernvideoplayer-speedmenu__item {
+    width: 100%;
+    text-align: left;
+    padding: .35rem .9rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.modernvideoplayer-speedmenu__item:hover,
+.modernvideoplayer-speedmenu__item:focus {
+    background: rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+.modernvideoplayer-speedmenu__item--active {
+    font-weight: 600;
+    background: rgba(37, 99, 235, 0.12);
+}
+
+/* Keyboard shortcuts help modal. */
+.modernvideoplayer-shortcuts-help {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.55);
+    padding: 1rem;
+}
+
+.modernvideoplayer-shortcuts-help.d-none {
+    display: none;
+}
+
+.modernvideoplayer-shortcuts-help__dialog {
+    max-width: 32rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--bs-body-bg, #fff);
+}
+
+.modernvideoplayer-shortcuts-help__list dt {
+    margin-bottom: .5rem;
+}
+
+.modernvideoplayer-shortcuts-help__list dd {
+    margin-bottom: .5rem;
+}
+
+.modernvideoplayer-shortcuts-help kbd {
+    font-size: .85em;
+    padding: .15em .4em;
+    background: rgba(15, 23, 42, 0.9);
+    color: #fff;
+    border-radius: .25rem;
+    font-family: var(--bs-font-monospace, monospace);
+}
