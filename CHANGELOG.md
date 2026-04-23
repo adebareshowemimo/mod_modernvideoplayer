@@ -8,7 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Behat acceptance tests
+- Learner activity report (per-user watch progress export)
+
+## [0.11.0] - 2026-04-23
+
+### Added
+- Behat acceptance scenarios:
+  - `tests/behat/add_modernvideoplayer.feature` — creating an activity via the
+    data generator and confirming it renders on the course page and view page
+    (including the "No video" notification path).
+  - `tests/behat/focus_mode_settings.feature` — Enforcement settings section is
+    exposed, the three Focus Mode / PiP / transcript download toggles have the
+    documented defaults (`0/1/1`), and a teacher can enable Focus Mode, disable
+    transcript download, save, and round-trip the values.
+- Plugin version bumped to `2026042018`.
 
 ## [0.10.0] - 2026-04-23
 
