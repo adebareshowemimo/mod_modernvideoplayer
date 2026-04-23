@@ -10,9 +10,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - Learner bookmarks
 - Picture-in-Picture + transcript download
-- Activity completion rules
 - Gradebook integration
 - Behat acceptance tests
+
+## [0.7.0] - 2026-04-23
+
+### Added
+- **PHPUnit coverage for custom completion rules**:
+  `tests/completion/custom_completion_test.php` exercises every rule returned
+  by `\mod_modernvideoplayer\completion\custom_completion::get_defined_custom_rules()`:
+  - `completionvideopercent` complete/incomplete against `requiredpercent`.
+  - `completionvideoend` complete/incomplete with `graceseconds` tolerance.
+  - Incomplete result when no `modernvideoplayer_progress` row exists.
+  - Incomplete result when `duration` is unknown (0).
+  - Rule descriptions follow `cm_info->customdata.customcompletionrules`.
+  - Sort order places `completionview` first.
+- Total plugin suite now **23 tests / 65 assertions** (privacy + external + completion).
 
 ## [0.6.0] - 2026-04-23
 
