@@ -138,5 +138,10 @@ function xmldb_modernvideoplayer_upgrade(int $oldversion): bool {
         upgrade_mod_savepoint(true, 2026042008, 'modernvideoplayer');
     }
 
+    if ($oldversion < 2026042009) {
+        // No schema changes; new file area 'chapters' introduced for WebVTT chapter tracks.
+        upgrade_mod_savepoint(true, 2026042009, 'modernvideoplayer');
+    }
+
     return true;
 }

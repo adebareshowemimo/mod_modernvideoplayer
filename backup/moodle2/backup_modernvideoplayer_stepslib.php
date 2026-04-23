@@ -73,6 +73,7 @@ class backup_modernvideoplayer_activity_structure_step extends backup_activity_s
         $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'video', null);
         $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'poster', null);
         $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'captions', null);
+        $modernvideoplayer->annotate_files('mod_modernvideoplayer', 'chapters', null);
 
         return $this->prepare_activity_structure($modernvideoplayer);
     }

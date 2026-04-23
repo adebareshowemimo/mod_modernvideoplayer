@@ -52,6 +52,18 @@ Files without a recognised language suffix fall back to the **Default caption la
 $string['captionsoff'] = 'Captions off';
 $string['captionson'] = 'Captions: {$a}';
 $string['captionssettings'] = 'Captions & transcript';
+$string['chapterjumpto'] = 'Jump to chapter at {$a}';
+$string['chapterlist'] = 'Chapters';
+$string['chapters'] = 'Chapter markers (WebVTT)';
+$string['chapters_help'] = 'Upload a single WebVTT (.vtt) file containing chapter cues. Each cue becomes a clickable marker on the progress bar and an entry in the chapter list panel.
+
+Example cue:
+
+    00:00:00.000 --> 00:01:30.000
+    Introduction
+
+Learners can open the chapter list with the **Chapters** button in the player controls.';
+$string['chaptersunavailable'] = 'Chapters unavailable.';
 $string['completed'] = 'Completed';
 $string['completionmode'] = 'Completion mode';
 $string['completionmode_end'] = 'Complete only when end of video is validated';
@@ -62,6 +74,7 @@ $string['completionvideoenddesc'] = 'Learner must reach the validated end of the
 $string['completionvideopercent'] = 'Require video watch percentage';
 $string['completionvideopercentdesc'] = 'Learner must watch at least {$a}% of the video';
 $string['completionvideopercentgroup'] = 'Require video watch percentage';
+$string['currentchapter'] = 'Current chapter: {$a}';
 $string['defaultallowplaybackspeed'] = 'Allow playback speed control by default';
 $string['defaultautoplay'] = 'Default autoplay mode';
 $string['defaultcaptionlang'] = 'Default caption language';
@@ -202,6 +215,7 @@ $string['titlepositionhidden'] = 'Hidden';
 $string['titlepositionleft'] = 'Left';
 $string['titlepositionright'] = 'Right';
 $string['togglecaptions'] = 'Toggle captions';
+$string['togglechapters'] = 'Toggle chapters';
 $string['toggletranscript'] = 'Toggle transcript';
 $string['totalsecondswatched'] = 'Total watched seconds';
 $string['transcript'] = 'Transcript';

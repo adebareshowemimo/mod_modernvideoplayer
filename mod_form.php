@@ -75,6 +75,13 @@ class mod_modernvideoplayer_mod_form extends moodleform_mod {
         $mform->setDefault('defaultcaptionlang', $defaults['defaultcaptionlang']);
         $mform->addHelpButton('defaultcaptionlang', 'defaultcaptionlang', 'modernvideoplayer');
 
+        $mform->addElement('filemanager', 'chapters', get_string('chapters', 'modernvideoplayer'), null, [
+            'subdirs' => 0,
+            'maxfiles' => 1,
+            'accepted_types' => ['.vtt'],
+        ]);
+        $mform->addHelpButton('chapters', 'chapters', 'modernvideoplayer');
+
         $mform->addElement('header', 'playbacksettings', get_string('playbacksettings', 'modernvideoplayer'));
         $mform->addElement('advcheckbox', 'allowresume', get_string('resumeenabled', 'modernvideoplayer'));
         $mform->setDefault('allowresume', $defaults['allowresume']);
@@ -155,6 +162,10 @@ class mod_modernvideoplayer_mod_form extends moodleform_mod {
             $captionsid = file_get_submitted_draft_itemid('captions');
             file_prepare_draft_area($captionsid, $this->context->id, 'mod_modernvideoplayer', 'captions', 0, ['subdirs' => 0]);
             $defaultvalues['captions'] = $captionsid;
+
+            $chaptersid = file_get_submitted_draft_itemid('chapters');
+            file_prepare_draft_area($chaptersid, $this->context->id, 'mod_modernvideoplayer', 'chapters', 0, ['subdirs' => 0]);
+            $defaultvalues['chapters'] = $chaptersid;
         }
 
         $suffix = $this->get_suffix();

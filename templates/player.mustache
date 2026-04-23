@@ -11,6 +11,7 @@
     * focusmode, showtitle, titleleft, titlecenter, titleright - layout flags (bool)
     * backurl, backlabel - close button target (string)
     * hascaptions, captions, defaultcaptionlang - captions metadata (bool|array|string)
+    * haschapters, chapterurl, chapterlabel - chapter track metadata (bool|string|string)
 
     Example context (json):
     {
@@ -28,7 +29,10 @@
         "backlabel": "Back",
         "hascaptions": false,
         "captions": [],
-        "defaultcaptionlang": "en"
+        "defaultcaptionlang": "en",
+        "haschapters": false,
+        "chapterurl": "",
+        "chapterlabel": ""
     }
 }}
 <div class="modernvideoplayer" data-region="modern-video-player" data-cmid="{{cmid}}">
@@ -64,6 +68,9 @@
                 {{#captions}}
                     <track kind="subtitles" src="{{src}}" srclang="{{srclang}}" label="{{label}}"{{#default}} default{{/default}}>
                 {{/captions}}
+                {{#haschapters}}
+                    <track kind="chapters" src="{{chapterurl}}" srclang="{{defaultcaptionlang}}" label="{{chapterlabel}}" default>
+                {{/haschapters}}
             </video>
                 <div
                     class="position-absolute top-0 start-0 w-100 h-100 d-none align-items-center justify-content-center p-3"
@@ -95,6 +102,18 @@
             </div>
         </div>
     {{/hascaptions}}
+    {{#haschapters}}
+        <div class="modernvideoplayer-chapters card mt-3 d-none" data-region="chapters-panel" aria-label="{{#str}}chapterlist, modernvideoplayer{{/str}}">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="h6 mb-0">{{#str}}chapterlist, modernvideoplayer{{/str}}</h2>
+                <button type="button" class="btn-close" data-action="close-chapters" aria-label="{{#str}}togglechapters, modernvideoplayer{{/str}}"></button>
+            </div>
+            <div class="card-body modernvideoplayer-chapters__body" data-region="chapters-body" tabindex="0">
+                <p class="text-muted mb-0" data-region="chapters-empty">{{#str}}chaptersunavailable, modernvideoplayer{{/str}}</p>
+                <ol class="list-unstyled mb-0 d-none" data-region="chapters-list"></ol>
+            </div>
+        </div>
+    {{/haschapters}}
     {{#focusmode}}
             </div>
         </div>

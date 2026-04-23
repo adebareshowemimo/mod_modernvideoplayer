@@ -171,6 +171,17 @@ function modernvideoplayer_save_files(stdClass $data, context_module $context): 
             ['subdirs' => 0, 'maxfiles' => 10]
         );
     }
+
+    if (!empty($data->chapters)) {
+        file_save_draft_area_files(
+            $data->chapters,
+            $context->id,
+            'mod_modernvideoplayer',
+            'chapters',
+            0,
+            ['subdirs' => 0, 'maxfiles' => 1]
+        );
+    }
 }
 
 /**
@@ -297,7 +308,7 @@ function modernvideoplayer_pluginfile($course, $cm, $context, $filearea, $args, 
         return false;
     }
 
-    if (!in_array($filearea, ['video', 'poster', 'captions'], true)) {
+    if (!in_array($filearea, ['video', 'poster', 'captions', 'chapters'], true)) {
         return false;
     }
 

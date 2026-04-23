@@ -109,6 +109,12 @@ $captiontracks = modernvideoplayer_get_caption_tracks($context, $defaultcaptionl
 $playercontext['hascaptions'] = !empty($captiontracks);
 $playercontext['captions'] = $captiontracks;
 
+$chaptertrack = modernvideoplayer_get_chapter_track($context);
+$playercontext['haschapters'] = $chaptertrack !== null;
+$playercontext['chapterurl'] = $chaptertrack['src'] ?? '';
+$playercontext['chapterlabel'] = $chaptertrack['label'] ?? '';
+$playercontext['defaultcaptionlang'] = $defaultcaptionlang;
+
 $autoplaymode = (string) ($instance->autoplay ?? 'unmuted');
 if (!in_array($autoplaymode, ['off', 'muted', 'unmuted'], true)) {
     $autoplaymode = 'unmuted';
@@ -118,6 +124,7 @@ $jsconfig = [
     'cmid' => $cm->id,
     'autoplay' => $autoplaymode,
     'hascaptions' => !empty($captiontracks),
+    'haschapters' => $chaptertrack !== null,
     'defaultcaptionlang' => $defaultcaptionlang,
     'strings' => [
         'seekblocked' => get_string('seekblocked', 'modernvideoplayer'),
@@ -140,6 +147,11 @@ $jsconfig = [
         'transcriptloading' => get_string('transcriptloading', 'modernvideoplayer'),
         'transcriptunavailable' => get_string('transcriptunavailable', 'modernvideoplayer'),
         'transcriptjumpto' => get_string('transcriptjumpto', 'modernvideoplayer', '__TIME__'),
+        'chapters' => get_string('chapters', 'modernvideoplayer'),
+        'togglechapters' => get_string('togglechapters', 'modernvideoplayer'),
+        'chaptersunavailable' => get_string('chaptersunavailable', 'modernvideoplayer'),
+        'chapterjumpto' => get_string('chapterjumpto', 'modernvideoplayer', '__TIME__'),
+        'currentchapter' => get_string('currentchapter', 'modernvideoplayer', '__LABEL__'),
     ],
 ];
 

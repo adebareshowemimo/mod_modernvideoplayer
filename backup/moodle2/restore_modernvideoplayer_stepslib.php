@@ -106,5 +106,7 @@ class restore_modernvideoplayer_activity_structure_step extends restore_activity
         $this->add_related_files('mod_modernvideoplayer', 'intro', null);
         $this->add_related_files('mod_modernvideoplayer', 'video', null);
         $this->add_related_files('mod_modernvideoplayer', 'poster', null);
+        $this->add_related_files('mod_modernvideoplayer', 'captions', null);
+        $this->add_related_files('mod_modernvideoplayer', 'chapters', null);
     }
 }

@@ -190,3 +190,25 @@ function modernvideoplayer_get_caption_tracks(context_module $context, string $d
 
     return $tracks;
 }
+
+/**
+ * Get the chapter track (single WebVTT) for a module instance.
+ *
+ * @param context_module $context the module context
+ * @return array|null ['src' => string, 'label' => string] or null when not uploaded
+ */
+function modernvideoplayer_get_chapter_track(context_module $context): ?array {
+    $file = modernvideoplayer_get_file($context, 'chapters');
+    if (!$file) {
+        return null;
+    }
+    $name = $file->get_filename();
+    if (!preg_match('/\.vtt$/i', $name)) {
+        return null;
+    }
+    $label = preg_replace('/\.vtt$/i', '', $name);
+    return [
+        'src' => modernvideoplayer_file_url($file)->out(false),
+        'label' => $label !== '' ? $label : $name,
+    ];
+}
